@@ -1,14 +1,23 @@
 {
   "name": "npmtest-2999",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "npm test",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engine": {
+    "node": "10.6.0"
+  },
   "author": "jiindev",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.2"
   }
 }
