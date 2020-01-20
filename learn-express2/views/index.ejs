@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% include header.ejs%>
+    <h1><%= title %></h1>
+    <% for (i of fruits) { %>
+    <p>Welcome to <%= i %></p>
+    <%}%>
+    <% if(title === 'ejs'){ %>
+        <p>ejs 공부해요</p>
+    <% } else { %>
+      <p>pug 공부해요</p>
+    <%} %>
+    <% include footer.ejs%>
+  </body>
+</html>

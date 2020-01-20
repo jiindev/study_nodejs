@@ -1,0 +1,24 @@
+extends lay.pug
+
+block content
+    div#jiindv(style='width:500px')
+    span.class(style='color:#f4f4f4') test
+    button(type='submit') 전송
+    if variable
+        div 참입니다
+    else
+        div 거짓입니다
+    for i in fruits
+        div=i
+    p|hi
+        |뭐임
+        |여러줄을
+        |쓸 수 있다.
+        br
+        |뭐임
+
+block script 
+    script.
+        let message='pug';
+        alert(message);
+

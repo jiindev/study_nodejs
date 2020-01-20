@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        -const variable = false
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title=title + ' '+title2
+        link(rel="stylesheet", href="/stylsheets/style.css")
+        style.
+            p{
+                color:red
+            }
+    body
+        include header
+        block content
+        include footer
+        block script
+            script.
+                console.log('hi')
