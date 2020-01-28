@@ -6,7 +6,7 @@ const {User} = require('../models');
 router.get('/', function(req, res, next) {
   User.findAll()
     .then((users)=>{
-      res.render('sequelize', { title: 'Express', users:users });
+      res.render('sequelize', { title: '시퀄라이즈 연습', users:users });
     })
     .catch((err)=>{
       console.error(err);
