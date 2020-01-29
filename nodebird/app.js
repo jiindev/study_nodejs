@@ -3,8 +3,12 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const morgan = require('morgan');
 const session = require('express-session');
-const flash = require('flash');
+const flash = require('connect-flash');
 require('dotenv').config();
+
+
+const indexRouter = require('./routes/page');
+// const userRouter = require('./routes/user');
 
 const app = express();
 
@@ -27,6 +31,21 @@ app.use(session({
     }
 }));
 app.use(flash());
+
+app.use('/', indexRouter);
+
+app.use((req, res, next)=>{
+    const err = new Error('Not Found');
+    err.status = 404;
+    next (err);
+});
+
+app.use((err, req, res)=>{
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'develpment' ? err : {};
+    res.status(err.status || 500);
+    res.render('error');
+})
 
 app.listen(app.get('port'), ()=>{
     console.log(`${app.get('port')}8001번 포트에서 서버 실행중입니다.`);
