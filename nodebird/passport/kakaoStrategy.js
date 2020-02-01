@@ -13,7 +13,7 @@ module.exports = (passport) => {
             const exUser = await User.findOne({
                 where: {
                     snsId: profile.id,
-                    provider: kakao
+                    provider: 'kakao'
                 }
             });
             if (exUser) {
