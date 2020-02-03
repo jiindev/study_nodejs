@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SEARCH</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+
+        body {
+            background-color: yellow;
+            margin: 0;
+        }
+
+        .wrap {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-align-items: center;
+            align-items: center;
+            margin: 0;
+        }
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 72px;
+            text-align: center;
+            flex: 1;
+            line-height: .3;
+        }
+
+        form {
+            text-align: center;
+            flex: 1;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            box-sizing: border-box;
+            width: 300px;
+            font-size: 24px;
+            border: 1px solid black;
+        }
+
+        button {
+            background-color: #000;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            font-family: 'Bebas Neue', cursive;
+            width: 50px;
+            height: 50px;
+            position: relative;
+            top: -2px;
+            transition: all .2s ease;
+            display: block;
+            margin: 10px auto;
+            border-radius: 50px;
+        }
+
+        button:hover {
+            background-color: rgb(0, 21, 255);
+        }
+        .result{
+            background-color: rgba(0,0,0,.6);
+            color: yellow;
+            text-align: center;
+            padding: 15px;
+            border-radius: 30px;
+            opacity: 0;
+            transition: all .2s ease;
+            font-weight: 100;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="content">
+            <h1>Search</h1>
+            <form action="/ajax_search" method="post">
+                <input type="text" class="searchWord">
+            </form>
+            <button class="searchBtn">GO</button>
+            <div class="result">dd</div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.searchBtn').addEventListener('click', () => {
+            let searchWord = document.querySelector('.searchWord').value;
+            sendAjax('http://localhost:3000/ajax_search', searchWord);
+        });
+        const sendAjax = (url, data) => {
+            let jsonData = {
+                'searchWord': data
+            };
+            jsonData = JSON.stringify(jsonData);
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', url);
+            xhr.setRequestHeader('Content-Type', "application/json");
+            xhr.send(jsonData);
+            xhr.addEventListener('load', () => {
+                let result = JSON.parse(xhr.responseText);
+                if(result.result !=="ok") return;
+                document.querySelector('.result').style.opacity = 1;
+                if(!result.searchWord){
+                    document.querySelector('.result').innerHTML = `검색어를 입력해주세요.`;
+                    return;
+                }
+                document.querySelector('.result').innerHTML = `<b>${result.searchWord}</b>에 대한 검색 결과가 없습니다.`;
+            });
+        };
+    </script>
+</body>
+
+</html>
