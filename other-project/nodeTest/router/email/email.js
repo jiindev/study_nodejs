@@ -24,11 +24,11 @@ router.post('/form', (req, res) => {
 router.post('/ajax', (req, res) => {
     let email = req.body.email;
     let responseData = {};
-    let query = connection.query(`select name from user where email="${email}"`, (err, rows) => {
+    let query = connection.query(`select email from user where email="${email}"`, (err, rows) => {
         if (err) throw err;
         if (rows[0]) {
             responseData.result = 'ok';
-            responseData.name = rows[0].name;
+            responseData.name = rows[0].email;
         } else {
             responseData.result = "none";
             responseData.name = "";

@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     let msg;
     let errMsg = req.flash('error');
     if(errMsg) msg=errMsg;
-    res.render('join.ejs',{'message':msg});
+    res.render('login.ejs',{'message':msg});
 });
 
 passport.serializeUser((user, done)=>{
@@ -34,39 +34,32 @@ passport.deserializeUser((id, done)=>{
     done(null, id);
 });
 
-passport.use('local-join', new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, (req, email, password, done) => {
+    console.log(1);
     let query = connection.query('select * from user where email=?',[email], (err, rows)=>{
         if(err) return done(err);
         if(rows.length){
-            console.log('existed user');
-            return done(null, false, {message: 'your email is aleady used'});
+            return done(null, {'email':email, 'id':rows[0].id});
         }else{
-            let sql = {email:email, password:password};
-            let query = connection.query(`insert into user set ?`, sql, (err, rows)=>{
-                if(err) throw err;
-                return done(null, {'email':email, 'id':rows.insertId});
-            });
+            return done(null, false, {'message':'your login info is not found'});
         }
     })
 }));
 
-router.post('/', passport.authenticate('local-join', {
-    successRedirect: '/main',
-    failureRedirect: '/join',
-    failureFlash: true
-}));
-// router.post('/', (req, res) => {
-//     const {email, name, password} = req.body;
-//     let sql = {email:email, name:name, password:password};
-//     let query = connection.query(`insert into user set ?`,sql, (err, rows)=>{
-//         if(err) throw err;
-//         res.render('welcome.ejs', {'email':req.body.email, 'name':name, 'id':rows.insertId});
-//     });
-// });
+router.post('/', (req, res, next)=>{
+    passport.authenticate('local-login', (err, user, info)=>{
+        if(err) return res.status(500).json(err);
+        if(!user) { return res.status(401).json(info.message)}
+        req.logIn(user, (err)=>{
+            if(err) return next(err);
+            return res.json(user);
+        });
+    })(req, res, next);
+});
 
 
 module.exports = router;

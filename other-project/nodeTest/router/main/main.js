@@ -4,7 +4,9 @@ const router = express.Router();
 const path = require('path');
 
 router.get('/', (req, res)=>{
-    res.sendFile(path.join(__dirname, '../public/main.html'));
+    let id = req.user;
+    if(!id) res.redirect('/login');
+    res.render('main.ejs', {'id':id});
 });
 
 module.exports = router;
