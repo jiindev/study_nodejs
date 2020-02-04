@@ -27,8 +27,9 @@
             xhr.send(jsonData);
             xhr.addEventListener('load', ()=>{
                 let result = JSON.parse(xhr.responseText);
-                if(result.result !=="ok") return;
-                document.querySelector('.result').innerHTML = result.email;
+                let resultDiv = document.querySelector('.result');
+                if(result.result !=="ok") resultDiv.innerHTML = `이메일 정보를 찾을 수 없습니다.`;
+                else resultDiv.innerHTML = `${result.name}님, 어서오세요!`;
             });
         }
     </script>
