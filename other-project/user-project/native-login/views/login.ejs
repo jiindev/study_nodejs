@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCESS PAGE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+        body{
+            text-align: center;
+            background-color: rgb(196, 196, 196);
+        }
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 72px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        input{
+            border: 5px solid black;
+            padding: 10px 30px;
+            width: 250px;
+            box-sizing: border-box;
+            font-size: 24px;
+            margin: 5px 0;
+            font-weight: bold;
+            transition: all .2s;
+        }
+        input:focus{
+            background-color: red;
+            color: white;
+            outline: none;
+        }
+        input:focus::placeholder{
+            color: white;
+        }
+        button{
+            border: none;
+            background-color: #000;
+            color: white;
+            padding: 10px 30px;
+            width: 250px;
+            box-sizing: border-box;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+            font-size: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+        p{
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">◀</a>
+    <h1>ACCESS PAGE</h1>
+    <form action="/login" method="post">
+        <input type="text" name="userId" placeholder="ID-NUMBER"><br>
+        <input type="password" name="password" placeholder="SECRET CODE"><br>
+        <button>ACCESS</button>
+    </form>
+    <% if(message!==''){ %>
+        <p><%=message%></p>
+    <%    }%>
+    
+</body>
+</html>

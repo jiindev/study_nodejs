@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD PERMISSION</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+        body{
+            text-align: center;
+            background-color: rgb(196, 196, 196);
+        }
+        h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 72px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        input,select{
+            border: 5px solid black;
+            padding: 10px 30px;
+            width: 250px;
+            box-sizing: border-box;
+            font-size: 24px;
+            margin: 5px 0;
+            font-weight: bold;
+            transition: all .2s;
+            height: 50px;
+        }
+        input:focus,select:focus{
+            background-color: red;
+            color: white;
+            outline: none;
+        }
+        input:focus::placeholder{
+            color: white;
+        }
+        button{
+            border: none;
+            background-color: #000;
+            color: white;
+            padding: 10px 30px;
+            width: 250px;
+            box-sizing: border-box;
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        p{
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+            font-size: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">◀</a>
+    <h1>ADD PERMISSION</h1>
+    <form action="/join" method="post">
+        <input type="text" name="userId" placeholder="ID-NUMBER"><br>
+        <% if(message!==''){ %>
+        <p><%=message%></p>
+        <%    }%>
+        <input type="password" name="password" placeholder="SECRET CODE"><br>
+        <input type="text" name="name" placeholder="YOUR NAME"><br>
+        <select name="level">
+            <option value="" selected disabled hidden>SELECT LEVEL</option>
+            <option value="1">ONE</option>
+            <option value="2">TWO</option>
+            <option value="3">THREE</option>
+            <option value="4">FOUR</option>
+            <option value="5">FIVE</option>
+        </select><br>
+        <button>ADD</button>
+    </form>
+</body>
+</html>
